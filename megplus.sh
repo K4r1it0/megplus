@@ -70,7 +70,7 @@ if [[ $1 == '-x' ]] && [[ $2 != '' ]]; then
 elif [[ $1 == '-s' ]] && [[ $2 != '' ]]; then
 	printf "${GREEN}[+]${END} Running Sublist3r against $2.\\n"
 	# Set Sublist3r path here!
-	python Sublist3r/sublist3r.py -d "$2" -o domains-sub > /dev/null
+	python3 Sublist3r/sublist3r.py -d "$2" -o domains-sub > /dev/null
 	while read -r domain; do 
 		if host "$domain" > /dev/null; then 
 			echo "$domain"; 
@@ -80,7 +80,7 @@ elif [[ $1 == '-s' ]] && [[ $2 != '' ]]; then
 	targets="domains-plus"
 	echo
 else
-	cat "$1"" | sed "-E 's#https?://##I' | sed -E 's#/.*##' | sed -E 's#^\*\.?##' | sed -E 's#,#\n#g' | tr '[:upper:]' '[:lower:]' | uniq | sed -e 's/^/https:\/\//' > "$1-plus"
+	cat "$1" | sed -E 's#https?://##I' | sed -E 's#/.*##' | sed -E 's#^\*\.?##' | sed -E 's#,#\n#g' | tr '[:upper:]' '[:lower:]' | uniq | sed -e 's/^/https:\/\//' > "$1-plus"
 	targets="$1-plus"
 fi
 

@@ -80,7 +80,7 @@ elif [[ $1 == '-s' ]] && [[ $2 != '' ]]; then
 	targets="domains-plus"
 	echo
 else
-	cat "$1"" | sed "-E 's#https?://##I' | sed -E 's#/.*##' | sed -E 's#^\*\.?##' | sed -E 's#,#\n#g' | tr '[:upper:]' '[:lower:]' | uniq | sed -e 's/^/https:\/\//' > "$1-plus"
+	cat "$1" | sed -E 's#https?://##I' | sed -E 's#/.*##' | sed -E 's#^\*\.?##' | sed -E 's#,#\n#g' | tr '[:upper:]' '[:lower:]' | uniq | sed -e 's/^/https:\/\//' > "$1-plus"
 	targets="$1-plus"
 fi
 
